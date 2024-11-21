@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gear Calculation</title>
+</head>
+<body>
+    <h1>Calculate Change Gears</h1>
+    <form method="POST">
+        <label for="beta">Enter value of beta (degrees):</label>
+        <input type="text" id="beta" name="beta" required><br><br>
+
+        <label for="Z">Enter number of teeth (Z):</label>
+        <input type="number" id="Z" name="Z" required><br><br>
+
+        <label for="max_sols">Enter max number of solutions:</label>
+        <input type="number" id="max_sols" name="max_sols" required><br><br>
+
+        <label for="m">Enter Module (M):</label>
+        <input type="number" id="M" name="M" required><br><br>
+
+        <input type="submit" value="Calculate">
+    </form>
+
+    {% if result_helix or result_gears %}
+        <h2>Calculation Details:</h2>
+        <ul>
+            <li><strong>Beta Angle (Degrees):</strong> {{ beta }}</li>
+            <li><strong>Number of Teeth (Z):</strong> {{ Z }}</li>
+            <li><strong>Index Ratio:</strong> {{ index_ratio }}</li>
+            
+            
+        </ul>
+    {% endif %}
+
+    {% if result_helix %}
+        <h2>Helix Gear Results:</h2>
+        
+        <p>Recommended Change Gears for Helix Angle: {{ result_helix }} =  (A,B,C,D)</p>
+    {% endif %}
+
+    {% if result_gears %}
+        <h2>Change Gears Results:</h2>
+        <ul>
+            {% for gear in result_gears %}
+                <li>The change gears found are: (A,B) = (60,60) and (C,D) = {{ gear }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
